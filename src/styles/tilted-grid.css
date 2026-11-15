@@ -1,0 +1,88 @@
+/* ------------------------------------------------------------
+   TiltedGridHero — images riding a shallow cylinder
+------------------------------------------------------------ */
+
+.tilted-grid {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  container-type: size;
+  background: none;
+}
+
+.tilted-grid__stage {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.tilted-grid__column {
+  position: absolute;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.tilted-grid__frame {
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  background: #101010;
+  backface-visibility: hidden;
+}
+
+/* Outer strips carry the tile's rounded ends */
+.tilted-grid__frame:first-child {
+  border-radius: 10px 0 0 10px;
+}
+
+.tilted-grid__frame:last-child {
+  border-radius: 0 10px 10px 0;
+}
+
+.tilted-grid__frame img {
+  position: absolute;
+  top: 0;
+  display: block;
+  max-width: none;
+  object-fit: cover;
+}
+
+/* ---- Copy layer: heading sitting directly above the artwork ---- */
+
+.tilted-grid__content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-rows: 1fr var(--tile-band, 30cqh) 1fr;
+  justify-items: center;
+  height: 100%;
+  padding: clamp(1.5rem, 4vh, 2.5rem) clamp(1.25rem, 4vw, 3rem);
+  text-align: center;
+  pointer-events: none;
+}
+
+.tilted-grid__content > * {
+  position: relative;
+  z-index: 1;
+  grid-row: 1;
+  align-self: end;
+  margin: 0 0 clamp(2rem, 4.5vh, 3rem);
+  pointer-events: auto;
+}
+
+.tilted-grid h2 {
+  font-family: var(--font-sans);
+  font-size: clamp(2.1rem, 4.6vw, 3.6rem);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  color: var(--fg);
+  text-wrap: balance;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.65);
+}
+
+@media (max-width: 640px) {
+  .tilted-grid__content {
+    padding: 1.25rem 1.25rem;
+  }
+}

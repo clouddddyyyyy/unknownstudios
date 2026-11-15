@@ -1,0 +1,522 @@
+/* ------------------------------------------------------------
+   Unknown Studios: home.css
+   Minimal, premium, black & white.
+------------------------------------------------------------ */
+
+/* ------------------------------------------------------------
+   Scroll-in reveal
+   Content stays visible at all times; only the offset animates, so a
+   failed observer or a non-painting tab can never hide the page.
+------------------------------------------------------------ */
+.reveal {
+  transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+html.js-reveal .reveal:not(.visible) {
+  transform: translateY(18px);
+}
+
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+
+/* ------------------------------------------------------------
+   Hero
+------------------------------------------------------------ */
+/* Fills the viewport below the sticky navbar (pill is ~4.75rem tall) */
+.hero {
+  position: relative;
+  min-height: calc(100svh - 4.75rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8vh 1.5rem 4vh; /* optical centre sits just below the middle */
+  overflow: hidden;
+  scroll-margin-top: 7rem;
+}
+
+/* Logo lockup: centred, about half the width */
+.hero-logo-wrap {
+  width: clamp(220px, 48vw, 660px);
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-logo {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Show the logo that matches the theme */
+.hero-logo--light { display: none; }
+:root[data-theme="light"] .hero-logo--dark { display: none; }
+:root[data-theme="light"] .hero-logo--light { display: block; }
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) .hero-logo--dark { display: none; }
+  :root:not([data-theme]) .hero-logo--light { display: block; }
+}
+
+/* Sections */
+.section {
+  padding: 3rem 1.5rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.section-header h2 {
+  font-family: var(--font-sans);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--fg);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.section-content {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--fg);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.section-tags {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.section-tags li {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--muted);
+  background: var(--bg);
+  padding: 0.25rem 0.75rem;
+  border-radius: 100px;
+  font-weight: 500;
+}
+
+/* Work section */
+.work-section {
+  background: var(--bg);
+}
+
+/* Services section */
+.services-section {
+  background: var(--bg);
+}
+
+/* About section */
+.about-section {
+  background: var(--bg);
+}
+
+/* Hero sentence */
+.hero-p {
+  font-family: var(--font-sans);
+  font-size: clamp(20px, 2.4vw, 34px);
+  line-height: 1.4;
+  color: var(--fg);
+  max-width: 720px;
+  margin: 40px auto 0;
+  font-weight: 400;
+}
+
+.italic-accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.15em;
+}
+
+/* Arrow text links: thin underline that draws in on hover */
+.hero-links {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.hero-link {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--fg);
+  position: relative;
+  padding-bottom: 8px;
+}
+
+.hero-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0.35);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+.hero-link:hover::after,
+.hero-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.arrow {
+  margin-left: 0.35rem;
+  font-size: 0.8em;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.hero-link:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* Project band (CardCarousel) — full-bleed cards under a section heading */
+.work-band {
+  width: 100%;
+  padding: clamp(48px, 8vh, 88px) 0 clamp(40px, 7vh, 72px);
+}
+
+.work-band__head {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-inline: var(--gutter);
+  margin-bottom: clamp(34px, 4vw, 56px);
+}
+
+.work-band__eyebrow {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.work-band__title {
+  font-family: var(--font-sans);
+  font-size: clamp(2rem, 4.4vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.03;
+  letter-spacing: -0.03em;
+  color: var(--fg);
+  margin: 0;
+}
+
+/* ------------------------------------------------------------
+   Footer
+------------------------------------------------------------ */
+.footer {
+  width: 100%;
+  padding: 16px 16px 24px; /* cards never touch the page edges */
+}
+
+.footer-cards {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+/* Left brand card — same surface treatment as the navbar pill */
+.footer-card-left {
+  flex: 1.15;
+  background: rgba(18, 18, 18, 0.88);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 40px 32px;
+  color: var(--fg);
+  position: relative;
+  overflow: hidden;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-card-left::before {
+  display: none;
+}
+
+.footer-card-left > * {
+  position: relative;
+  z-index: 1;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  user-select: none;
+}
+
+.footer-logo img {
+  width: 2rem;
+  height: 2rem;
+  object-fit: contain;
+  display: block;
+}
+
+.footer-logo span {
+  font-family: var(--font-sans);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+}
+
+/* Pinned to the bottom of the card */
+.footer-brand-bottom {
+  margin-top: auto;
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.footer-tagline {
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--fg);
+  margin: 1.25rem 0 0;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  max-width: 11em;
+}
+
+.footer-social-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Primary CTA — white pill, same accent as the navbar socials on hover */
+.footer-cta {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.25rem;
+  border-radius: 9999px;
+  background: #fff;
+  color: #000;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.footer-cta:hover,
+.footer-cta:focus-visible {
+  background: #d8d8d8;
+  transform: translateY(-2px);
+}
+
+/* Social buttons match .navbar-social-link exactly */
+.footer-social-icons a {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  transition: color 0.18s ease, background 0.18s ease, border-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.footer-social-icons a:hover,
+.footer-social-icons a:focus-visible {
+  color: #000;
+  background: #fff;
+  border-color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Icon paths carry fill="currentColor"; only size them here */
+.footer-social-icons svg {
+  width: 17px;
+  height: 17px;
+  display: block;
+}
+
+.footer-copyright {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+/* Right links card — identical surface to the navbar */
+.footer-card-right {
+  flex: 2;
+  background: rgba(18, 18, 18, 0.88);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 40px;
+  color: var(--fg);
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-cols {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  margin-bottom: 48px;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-col-title {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--fg);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.footer-col-link {
+  font-size: 0.95rem;
+  color: var(--muted);
+  transition: color 0.18s ease;
+}
+
+.footer-col-link:hover,
+.footer-col-link:focus-visible {
+  color: var(--fg);
+}
+
+.footer-col-link:focus-visible,
+.footer-newsletter-form input:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 2px;
+  border-radius: 9999px;
+}
+
+/* Newsletter */
+.footer-newsletter {
+  margin-top: auto;
+}
+
+.footer-newsletter-title {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--fg);
+  letter-spacing: -0.01em;
+  margin: 0 0 14px;
+}
+
+.footer-newsletter-form {
+  display: flex;
+  gap: 10px;
+}
+
+.footer-newsletter-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 0 18px;
+  background: var(--border-soft);
+  border: 1px solid var(--border);
+  color: var(--fg);
+  font-family: inherit;
+  font-size: 0.95rem;
+  border-radius: 9999px;
+  height: 46px;
+}
+
+.footer-newsletter-form input::placeholder {
+  color: var(--muted);
+}
+
+.footer-newsletter-form input:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.footer-newsletter-form button {
+  padding: 0 24px;
+  background: #fff;
+  color: #000;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 9999px;
+  height: 46px;
+  transition: background 0.18s ease, transform 0.18s ease;
+}
+
+.footer-newsletter-form button:hover {
+  background: #d8d8d8;
+  transform: translateY(-1px);
+}
+
+.footer-newsletter-note {
+  margin: 12px 0 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .footer-cards {
+    flex-direction: column;
+  }
+
+  .footer-card-left,
+  .footer-card-right {
+    min-height: auto;
+  }
+
+  .footer-card-right {
+    padding: 32px 24px;
+  }
+
+  .footer-cols {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .footer-newsletter-form {
+    flex-direction: column;
+  }
+
+  .footer-newsletter-form input,
+  .footer-newsletter-form button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-cols {
+    grid-template-columns: 1fr;
+  }
+}

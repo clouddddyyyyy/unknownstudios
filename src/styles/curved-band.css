@@ -1,0 +1,136 @@
+/* ------------------------------------------------------------
+   Featured artwork — one image in a curved, rounded frame
+------------------------------------------------------------ */
+.curved {
+  position: relative;
+  width: min(calc(100% - (var(--gutter) * 2)), 1680px);
+  margin: 0 auto;
+  perspective: 1600px;
+  perspective-origin: 50% 40%;
+  isolation: isolate;
+  animation: band-float 16s ease-in-out infinite;
+}
+
+/* Barely-there drift, so the card feels like an object in the room. */
+@keyframes band-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Artwork's own light spilling past the frame, so the card sits in the page
+   instead of floating on flat black. */
+.curved__glow {
+  position: absolute;
+  inset: -8% -3%;
+  width: 106%;
+  height: 116%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center;
+  filter: blur(72px) saturate(1.15) brightness(0.7);
+  opacity: 0.55;
+  transform: scale(1.04);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.curved__frame {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: clamp(380px, 56vh, 680px);
+  border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #0d0b12;
+  overflow: hidden;
+  transform: rotateX(7deg) rotateY(-7deg);
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.75s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.75s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 70px 120px -60px rgba(0, 0, 0, 0.95),
+    0 30px 60px -30px rgba(0, 0, 0, 0.9);
+}
+
+.curved:hover .curved__frame,
+.curved:focus-within .curved__frame {
+  transform: rotateX(0deg) rotateY(0deg) scale(1.015);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 90px 150px -60px rgba(0, 0, 0, 0.95),
+    0 40px 80px -30px rgba(0, 0, 0, 0.9);
+}
+
+/* Angled sheen across the glass, the way a screen catches a room light. */
+.curved__frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    118deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.03) 22%,
+    rgba(255, 255, 255, 0) 46%,
+    rgba(0, 0, 0, 0.18) 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Flat artwork underneath, in case the canvas never paints. */
+.curved__fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center;
+  user-select: none;
+  pointer-events: none;
+}
+
+.curved__canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .curved__frame,
+  .curved:hover .curved__frame,
+  .curved:focus-within .curved__frame {
+    transform: none;
+    transition: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .curved__frame {
+    height: clamp(300px, 44vh, 460px);
+    border-radius: 24px;
+    transform: rotateX(4deg) rotateY(-4deg);
+  }
+
+  .curved__glow {
+    filter: blur(52px) saturate(1.1) brightness(0.7);
+    opacity: 0.45;
+  }
+}
+
+@media (max-width: 640px) {
+  .curved__frame {
+    height: clamp(230px, 34vh, 330px);
+    border-radius: 20px;
+  }
+}
