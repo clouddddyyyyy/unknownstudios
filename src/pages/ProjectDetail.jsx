@@ -10,28 +10,26 @@ export default function ProjectDetail({ project }) {
       </RouteLink>
 
       <header className="project__hero">
-        <div className="project__intro">
-          <h1 className="project__title">{project.name}</h1>
-          <p className="project__summary">{project.summary}</p>
+        <h1 className="project__title">{project.name}</h1>
+        <p className="project__summary">{project.summary}</p>
 
-          {project.links ? (
-            <div className="project__links">
-              {project.links.map((link) => (
-                <a
-                  key={link.label}
-                  className={`project__link${
-                    link.primary ? " project__link--primary" : ""
-                  }`}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-          ) : null}
-        </div>
+        {project.links ? (
+          <div className="project__links">
+            {project.links.map((link) => (
+              <a
+                key={link.label}
+                className={`project__link${
+                  link.primary ? " project__link--primary" : ""
+                }`}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        ) : null}
 
         {project.stats ? (
           <ul className="project__stats">
@@ -68,8 +66,10 @@ export default function ProjectDetail({ project }) {
                 <span className="project__module-index" aria-hidden="true">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <h3 className="project__module-name">{module.name}</h3>
-                <p className="project__module-text">{module.text}</p>
+                <div className="project__module-body">
+                  <h3 className="project__module-name">{module.name}</h3>
+                  <p className="project__module-text">{module.text}</p>
+                </div>
               </li>
             ))}
           </ol>
@@ -90,24 +90,16 @@ export default function ProjectDetail({ project }) {
       ) : null}
 
       {primary ? (
-        <aside className="project__cta">
-          <div className="project__cta-copy">
-            <h2 className="project__cta-title">
-              {project.cta ? project.cta.title : `Start using ${project.name}.`}
-            </h2>
-            {project.cta ? (
-              <p className="project__cta-text">{project.cta.text}</p>
-            ) : null}
-          </div>
+        <div className="project__cta-wrap">
           <a
-            className="project__link project__link--primary"
+            className="project__cta project__cta--primary"
             href={primary.href}
             target="_blank"
             rel="noopener noreferrer"
           >
-            {primary.label}
+            {primary.label} <span aria-hidden="true">→</span>
           </a>
-        </aside>
+        </div>
       ) : null}
     </main>
   );

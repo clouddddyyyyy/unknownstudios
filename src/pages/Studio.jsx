@@ -37,7 +37,7 @@ export default function Studio() {
     <main className="studio" id="studio">
       <header className="studio__hero">
         <h1 className="studio__title">
-          Games, bots and tools <em className="studio__accent">worth keeping</em>.
+          Games, bots and tools <em className="studio__accent">worth keeping</em>
         </h1>
         <p className="studio__lead">
           Unknown Studios is a small team building for Roblox and Discord. One
@@ -45,7 +45,10 @@ export default function Studio() {
         </p>
 
         <div className="studio__actions">
-          <RouteLink href="/projects" className="studio__action studio__action--primary">
+          <RouteLink
+            href="/projects"
+            className="studio__action studio__action--primary"
+          >
             See projects
           </RouteLink>
           <a
@@ -64,21 +67,18 @@ export default function Studio() {
 
         <ul className="studio__list">
           {DISCIPLINES.map((item) => {
-            const Row = item.href ? RouteLink : "div";
+            const Link = item.href ? RouteLink : "div";
             return (
-              <li key={item.name}>
-                <Row
+              <li key={item.name} className="studio__discipline">
+                <Link
                   {...(item.href ? { href: item.href } : {})}
-                  className={`studio__row${item.href ? " studio__row--link" : ""}`}
+                  className={`studio__discipline-link${
+                    item.href ? " studio__discipline--link" : ""
+                  }`}
                 >
-                  <span className="studio__row-name">{item.name}</span>
-                  <span className="studio__row-text">{item.text}</span>
-                  {item.href ? (
-                    <span className="studio__row-arrow" aria-hidden="true">
-                      →
-                    </span>
-                  ) : null}
-                </Row>
+                  <span className="studio__discipline-name">{item.name}</span>
+                  <span className="studio__discipline-text">{item.text}</span>
+                </Link>
               </li>
             );
           })}
@@ -94,30 +94,14 @@ export default function Studio() {
               <span className="studio__principle-index" aria-hidden="true">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <h3 className="studio__principle-title">{principle.title}</h3>
-              <p className="studio__principle-text">{principle.text}</p>
+              <div className="studio__principle-body">
+                <h3 className="studio__principle-title">{principle.title}</h3>
+                <p className="studio__principle-text">{principle.text}</p>
+              </div>
             </li>
           ))}
         </ol>
       </section>
-
-      <aside className="studio__cta">
-        <div className="studio__cta-copy">
-          <h2 className="studio__cta-title">Something should exist and doesn't?</h2>
-          <p className="studio__cta-text">
-            Tell us about it in the Discord. That's where everything we've built
-            started.
-          </p>
-        </div>
-        <a
-          className="studio__action studio__action--primary"
-          href={discordUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Join the Discord
-        </a>
-      </aside>
     </main>
   );
 }

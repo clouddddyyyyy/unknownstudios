@@ -10,6 +10,8 @@
 @import "./curved-band.css";
 @import "./projects.css";
 @import "./studio.css";
+@import "./careers.css";
+@import "./devlogs.css";
 
 /* Fonts: load them with <link> tags in index.html instead of @import (see notes) */
 

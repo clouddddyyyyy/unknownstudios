@@ -6,8 +6,8 @@ import { RouteLink, usePathname } from "../router.jsx";
 const LINKS = [
   { name: "Projects", href: "/projects", Icon: Layers },
   { name: "Studio", href: "/studio", Icon: Ghost },
-  { name: "Devlog", href: "#devlog", Icon: Newspaper },
-  { name: "Careers", href: "#careers", Icon: Users },
+  { name: "Devlog", href: "/devlogs", Icon: Newspaper },
+  { name: "Careers", href: "/careers", Icon: Users },
 ];
 
 export default function Navbar() {
