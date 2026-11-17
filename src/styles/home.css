@@ -23,22 +23,26 @@ html.js-reveal .reveal:not(.visible) {
 /* ------------------------------------------------------------
    Hero
 ------------------------------------------------------------ */
-/* Fills the viewport below the sticky navbar (pill is ~4.75rem tall) */
+/* Fills the whole viewport, bleeding behind the floating navbar pill */
 .hero {
   position: relative;
-  min-height: calc(100svh - 4.75rem);
+  z-index: 1;
+  min-height: 100svh;
+  margin-top: -4.75rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 8vh 1.5rem 4vh; /* optical centre sits just below the middle */
+  padding: calc(4.75rem + 6vh) 1.5rem 4vh;
   overflow: hidden;
   scroll-margin-top: 7rem;
 }
 
 /* Logo lockup: centred, about half the width */
 .hero-logo-wrap {
+  position: relative;
+  z-index: 1;
   width: clamp(220px, 48vw, 660px);
   margin: 0 auto;
   display: flex;
@@ -49,6 +53,82 @@ html.js-reveal .reveal:not(.visible) {
   width: 100%;
   height: auto;
   display: block;
+  filter: drop-shadow(0 18px 46px rgba(0, 0, 0, 0.6));
+}
+
+/* ------------------------------------------------------------
+   Page backdrop — blue silk on the home page only. Fixed, so it also sits
+   behind the navbar and the footer when that page scrolls.
+------------------------------------------------------------ */
+.page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: #05070d;
+}
+
+/* Reading pages (projects, project detail) drop the image so the copy
+   sits on a flat surface. */
+.page--solid {
+  background: #07070b;
+}
+
+.page-bg__img {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center 45%;
+  transform: scale(1.06);
+  filter: saturate(1.4) contrast(1.1) brightness(1.02);
+  animation: hero-drift 28s ease-in-out infinite alternate;
+}
+
+@keyframes hero-drift {
+  from {
+    transform: scale(1.06) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.13) translate3d(-2%, -1.6%, 0);
+  }
+}
+
+/* Colour grade + vignette. No fade to black at the bottom: the image keeps
+   running behind the footer. */
+.page-bg__tint {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(58% 48% at 14% 8%, rgba(104, 66, 255, 0.42), transparent 72%),
+    radial-gradient(52% 46% at 88% 88%, rgba(0, 186, 255, 0.3), transparent 72%),
+    radial-gradient(
+      118% 88% at 50% 46%,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.45) 60%,
+      rgba(0, 0, 0, 0.8) 100%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.62) 0%,
+      rgba(0, 0, 0, 0.12) 22%,
+      rgba(0, 0, 0, 0.2) 100%
+    );
+}
+
+/* Fine film grain keeps the large gradient from banding. */
+.page-bg__grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>");
+  background-size: 160px 160px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-bg__img {
+    animation: none;
+  }
 }
 
 /* Show the logo that matches the theme */
@@ -223,6 +303,8 @@ html.js-reveal .reveal:not(.visible) {
    Footer
 ------------------------------------------------------------ */
 .footer {
+  position: relative;
+  z-index: 1;
   width: 100%;
   padding: 16px 16px 24px; /* cards never touch the page edges */
 }
@@ -236,7 +318,7 @@ html.js-reveal .reveal:not(.visible) {
 /* Left brand card — same surface treatment as the navbar pill */
 .footer-card-left {
   flex: 1.15;
-  background: rgba(18, 18, 18, 0.88);
+  background: rgba(14, 14, 18, 0.82); backdrop-filter: blur(18px);
   border: 1px solid var(--border);
   border-radius: 24px;
   padding: 40px 32px;
@@ -371,7 +453,7 @@ html.js-reveal .reveal:not(.visible) {
 /* Right links card — identical surface to the navbar */
 .footer-card-right {
   flex: 2;
-  background: rgba(18, 18, 18, 0.88);
+  background: rgba(14, 14, 18, 0.82); backdrop-filter: blur(18px);
   border: 1px solid var(--border);
   border-radius: 24px;
   padding: 40px;

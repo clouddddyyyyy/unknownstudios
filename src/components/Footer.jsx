@@ -1,23 +1,23 @@
 import { useState } from "react";
 import SocialIcon, { SOCIALS } from "./SocialIcon.jsx";
 import { discordUrl } from "../data.js";
+import { RouteLink } from "../router.jsx";
 
 const COLUMNS = [
   {
     title: "Studio",
     links: [
-      { name: "Work", href: "#work" },
-      { name: "Services", href: "#services" },
-      { name: "About", href: "#about" },
-      { name: "Contact", href: "#contact" },
+      { name: "Projects", href: "/projects" },
+      { name: "About", href: "/studio" },
+      { name: "Contact", href: discordUrl },
     ],
   },
   {
     title: "Projects",
     links: [
-      { name: "Seshy", href: "#work" },
-      { name: "Roblox Games", href: "#work" },
-      { name: "Custom Tools", href: "#work" },
+      { name: "Seshy", href: "/projects/seshy" },
+      { name: "Roblox Games", href: "/projects" },
+      { name: "Custom Tools", href: "/projects" },
       { name: "Changelog", href: "#" },
     ],
   },
@@ -26,7 +26,7 @@ const COLUMNS = [
     links: [
       { name: "Docs", href: "#" },
       { name: "FAQ", href: "#" },
-      { name: "Support", href: "#contact" },
+      { name: "Support", href: discordUrl },
       { name: "Status", href: "#" },
     ],
   },
@@ -55,10 +55,10 @@ export default function Footer() {
       <div className="footer-cards">
         {/* White card: brand, socials, copyright */}
         <div className="footer-card footer-card-left">
-          <a href="/" className="footer-logo" aria-label="Unknown Studios home">
+          <RouteLink href="/" className="footer-logo" aria-label="Unknown Studios home">
             <img src="/icon-white.svg" alt="" />
             <span>unknown studios</span>
-          </a>
+          </RouteLink>
 
           <p className="footer-tagline">Make things people actually use.</p>
 
@@ -96,11 +96,23 @@ export default function Footer() {
             {COLUMNS.map((col) => (
               <div key={col.title} className="footer-col">
                 <h4 className="footer-col-title">{col.title}</h4>
-                {col.links.map((link) => (
-                  <a key={link.name} href={link.href} className="footer-col-link">
-                    {link.name}
-                  </a>
-                ))}
+                {col.links.map((link) => {
+                  const Link = link.href.startsWith("/") ? RouteLink : "a";
+                  const external = link.href.startsWith("http");
+
+                  return (
+                    <Link
+                      key={link.name}
+                      href={link.href}
+                      className="footer-col-link"
+                      {...(external
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
+                    >
+                      {link.name}
+                    </Link>
+                  );
+                })}
               </div>
             ))}
           </div>

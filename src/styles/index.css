@@ -8,6 +8,8 @@
 @import "./home.css";
 @import "./glass-reveal.css";
 @import "./curved-band.css";
+@import "./projects.css";
+@import "./studio.css";
 
 /* Fonts: load them with <link> tags in index.html instead of @import (see notes) */
 
@@ -37,28 +39,10 @@
   --gutter: clamp(16px, 4vw, 48px);
 }
 
-:root[data-theme="light"] {
-  color-scheme: light;
-
-  --bg: #ffffff;
-  --fg: #0a0a0a;
-  --muted: #666666;
-  --border: #e5e5e5;
-  --border-soft: #f1f1f1;
-  --surface: #f7f7f7;
-}
-
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme]) {
-    color-scheme: light;
-
-    --bg: #ffffff;
-    --fg: #0a0a0a;
-    --muted: #666666;
-    --border: #e5e5e5;
-    --border-soft: #f1f1f1;
-    --surface: #f7f7f7;
-  }
+/* The site is designed dark end to end — glass panels, white type, silk
+   artwork — so it stays dark regardless of the OS preference. */
+:root {
+  color-scheme: dark;
 }
 
 /* ------------------------------------------------------------

@@ -7,13 +7,12 @@ export const githubUrl = "https://github.com/unknownstudios";
 export const twitterUrl = "https://twitter.com/unknownstudios";
 
 export const navLinks = [
-  { name: "Work", href: "#work", icon: "▭" },
-  { name: "About", href: "#about", icon: "○" },
-  { name: "Services", href: "#services", icon: "□" },
-  { name: "Pricing", href: "#pricing", icon: "¢" },
-  { name: "Contact", href: "#contact", icon: "✉" },
+  { name: "Projects", href: "#projects", icon: "▭" },
+  { name: "Studio", href: "#studio", icon: "○" },
+  { name: "Devlog", href: "#devlog", icon: "□" },
+  { name: "Careers", href: "#careers", icon: "¢" },
+  { name: "Discord", href: "https://discord.gg/unknownstudios", icon: "✉" },
 ];
-
 export const projects = [
   { id: "seshy", name: "Seshy", type: "Discord bot" },
   { id: "orion", name: "Orion", type: "Roblox game" },

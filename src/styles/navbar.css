@@ -77,11 +77,30 @@
   background: rgba(255, 255, 255, 0.07);
 }
 
+.navbar-link.is-active {
+  color: var(--fg);
+  background: rgba(255, 255, 255, 0.09);
+}
+
 .navbar-link-icon {
   width: 18px;
   height: 18px;
   flex-shrink: 0;
   opacity: 0.85;
+}
+
+/* Community CTA — the one place a game studio wants people to click */
+.navbar-link--cta {
+  color: var(--fg);
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.navbar-link--cta:hover,
+.navbar-link--cta:focus-visible {
+  color: #000;
+  background: #fff;
+  border-color: #fff;
 }
 
 /* Divider between links and socials */
